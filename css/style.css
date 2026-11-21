@@ -1,0 +1,242 @@
+
+/* =========================
+   全体
+========================= */
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: Arial, "Helvetica Neue", sans-serif;
+    background: #f7f9fc;
+    color: #222;
+}
+
+button {
+    cursor: pointer;
+    font-family: inherit;
+}
+
+/* =========================
+   ヘッダー
+========================= */
+header {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.head {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 20px 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h1 {
+    margin: 0;
+    font-size: 26px;
+    color: #105cf1;
+}
+
+/* 追加ボタン */
+.add-btn {
+    background: #105cf1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+.add-btn:hover {
+    background: #0849c9;
+}
+
+/* =========================
+   メイン
+========================= */
+main {
+    max-width: 1100px;
+    margin: 40px auto;
+    padding: 0 24px;
+}
+
+/* 定型文一覧 */
+.list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+/* =========================
+   定型文カード
+========================= */
+.template-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 3px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* タイトル */
+.template-card h3 {
+    margin: 0 0 18px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #222;
+    overflow-wrap: anywhere;
+}
+
+/* 本文 */
+.card-text {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.8;
+    color: #555;
+
+    /* 改行をそのまま表示 */
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+/* =========================
+   新規登録画面
+========================= */
+.modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.45);
+
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    z-index: 10;
+}
+
+/* showクラスで表示 */
+.modal.show {
+    display: flex;
+}
+
+.modal-content {
+    background: white;
+    width: 100%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    padding: 28px;
+    border-radius: 14px;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.1);
+}
+
+/* モーダルのヘッダー */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.modal-header h2 {
+    margin: 0;
+    font-size: 21px;
+}
+
+/* 閉じるボタン */
+#modal-close {
+    background: none;
+    border: none;
+    font-size: 24px;
+    color: #777;
+}
+
+#modal-close:hover {
+    color: #222;
+}
+
+/* ラベル */
+label {
+    display: block;
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+/* 入力欄 */
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    margin-bottom: 22px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+}
+
+textarea {
+    resize: vertical;
+}
+
+/* 入力中 */
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #105cf1;
+}
+
+/* 保存ボタン */
+#save {
+    width: 100%;
+    padding: 13px;
+    background: #105cf1;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+#save:hover {
+    background: #0849c9;
+}
+
+/* =========================
+   スマートフォン対応
+========================= */
+@media (max-width: 650px) {
+
+    .head {
+        padding: 16px;
+    }
+
+    h1 {
+        font-size: 21px;
+    }
+
+    .add-btn {
+        padding: 10px 14px;
+        font-size: 13px;
+    }
+
+    main {
+        margin: 24px auto;
+        padding: 0 16px;
+    }
+
+    .list {
+        grid-template-columns: 1fr;
+    }
+
+    .template-card {
+        padding: 20px;
+    }
+
+}

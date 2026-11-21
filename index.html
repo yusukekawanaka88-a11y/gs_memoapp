@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=q, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <title>clipstock</title>
+</head>
+
+<body>
+    <header>
+        <div class="head">
+            <h1>clipstock</h1>
+            <button id="add-btn" class="add-btn">追加</button>
+        </div>
+    </header>
+
+    <main>
+        <div id="list" class="list">
+        </div>
+    </main>
+    <!--新規登録・編集画面-->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">新しい定型文追加</h2>
+                <button id="modal-close">✖️</button>
+            </div>
+            <label for="title-input">タイトル</label>
+            <input type="text" id="title-input">
+            <label for="text-input">本文</label>
+            <textarea id="text-input" cols="30" rows="10"></textarea>
+            <button id="save">SAVE</button>
+        </div>
+    </div>
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script>
+        // ① SAVEボタンを押したとき
+
+        $("#save").on("click", function () {
+
+            // 入力されたタイトルと本文を取得
+            const title = $("#title-input").val();
+            const text = $("#text-input").val();
+
+            // 空欄の場合は保存しない
+            if (title === "" || text === "") {
+                alert("タイトルと本文を入力してください");
+                return;
+            }
+
+            // localStorageに保存
+            // タイトルをkey、本文をvalueとして保存
+            localStorage.setItem(title, text);
+
+            // 一覧を更新する
+            displayTemplates();
+
+            // 入力画面を閉じる
+            $("#modal").removeClass("show");
+
+        });
+
+
+        // ② 登録した定型文を表示する
+        function displayTemplates() {
+
+            // 一度画面を空にする
+            $("#list").empty();
+
+            // localStorageのデータを繰り返し取得
+            for (let i = 0; i < localStorage.length; i++) {
+
+                // 保存されているタイトルを取得
+                const title = localStorage.key(i);
+
+                // タイトルに対応する本文を取得
+                const text = localStorage.getItem(title);
+
+                // 定型文カードを作成
+                const card = $("<div>").addClass("template-card");
+
+                // タイトルを作成
+                const titleElement = $("<h3>").text(title);
+
+                // 本文を作成
+                const textElement = $("<p>").addClass("card-text").text(text);
+
+                // カードにタイトルと本文を追加
+                card.append(titleElement);
+                card.append(textElement);
+
+                // 画面に表示
+                $("#list").append(card);
+
+            }
+
+        }
+
+        // ③ 追加ボタンを押したとき
+        $("#add-btn").on("click", function () {
+
+            // 入力欄を空にする
+            $("#title-input").val("");
+            $("#text-input").val("");
+
+            // 追加画面を表示
+            $("#modal").addClass("show");
+
+        });
+
+
+
+        // ④ 閉じるボタンを押したとき
+        $("#modal-close").on("click", function () {
+
+            $("#modal").removeClass("show");
+
+        });
+
+
+        // ⑤ 最初の画面表示
+
+        // ページを開いたときに保存データを表示
+        displayTemplates();
+
+    </script>
+</body>
+
+</html>
